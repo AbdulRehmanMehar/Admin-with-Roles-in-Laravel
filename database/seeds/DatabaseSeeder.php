@@ -12,30 +12,79 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Order Manger
+        // Order Mangers
         DB::table('users')->insert([
-            'name' => 'Order Manager',
-            'email' => 'ordermanager@app.com',
+            'name' => 'Order Manager 1',
+            'email' => 'ordermanager1@app.com',
             'password' => bcrypt('admin'),
             'isAdmin' => true,
-            'role' => 'order'
+            'role' => 'order',
         ]);
-        // Shipping Manager
         DB::table('users')->insert([
-            'name' => 'Shipping Manager',
-            'email' => 'shippingmanager@app.com',
+            'name' => 'Order Manager 2',
+            'email' => 'ordermanager2@app.com',
+            'password' => bcrypt('admin'),
+            'isAdmin' => true,
+            'role' => 'order',
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Order Manager 3',
+            'email' => 'ordermanager3@app.com',
+            'password' => bcrypt('admin'),
+            'isAdmin' => true,
+            'role' => 'order',
+        ]);
+        // Shipping Managers
+        DB::table('users')->insert([
+            'name' => 'Shipping Manager 1',
+            'email' => 'shippingmanager1@app.com',
             'password' => bcrypt('admin'),
             'isAdmin' => true,
             'role' => 'shipping'
         ]);
-        // Delivery manager
         DB::table('users')->insert([
-            'name' => 'Delivery Manager',
-            'email' => 'deliverymanager@app.com',
+            'name' => 'Shipping Manager 2',
+            'email' => 'shippingmanager2@app.com',
+            'password' => bcrypt('admin'),
+            'isAdmin' => true,
+            'role' => 'shipping'
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Shipping Manager 3',
+            'email' => 'shippingmanager3@app.com',
+            'password' => bcrypt('admin'),
+            'isAdmin' => true,
+            'role' => 'shipping'
+        ]);
+        // Delivery Managers
+        DB::table('users')->insert([
+            'name' => 'Delivery Manager 1',
+            'email' => 'deliverymanager1@app.com',
             'password' => bcrypt('admin'),
             'isAdmin' => true,
             'role' => 'delivery'
         ]);
-
+        DB::table('users')->insert([
+            'name' => 'Delivery Manager 2',
+            'email' => 'deliverymanager2@app.com',
+            'password' => bcrypt('admin'),
+            'isAdmin' => true,
+            'role' => 'delivery'
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Delivery Manager 3',
+            'email' => 'deliverymanager3@app.com',
+            'password' => bcrypt('admin'),
+            'isAdmin' => true,
+            'role' => 'delivery'
+        ]);
+        // Mian Admin
+        DB::table('users')->insert([
+            'name' => 'Real Admin',
+            'email' => 'theadmin@app.com',
+            'password' => bcrypt('admin'),
+            'isAdmin' => true,
+            'role' => 'mainAdmin'
+        ]); // This is just in case of no free member
     }
 }

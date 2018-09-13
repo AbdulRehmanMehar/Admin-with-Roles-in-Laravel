@@ -8,6 +8,6 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'cart','user_id','state','staff_id',
+        'cart','user_id','state','staff_id', 'admin'
     ];
 }

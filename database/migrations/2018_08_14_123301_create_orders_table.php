@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('cart');
             $table->string('user_id');
             $table->string('process')->nullable();
+            $table->string('admin');
             $table->timestamps();
         });
     }

@@ -12,7 +12,6 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Ordered By</th>
                             <th scope="col">Products</th>
                             <th scope="col">Action</th>
@@ -34,9 +33,8 @@
                                     $process = 'Product Shipped';
                                 }
                             @endphp
-                            @if($order->process == $process)
+                            @if($order->process == $process && $order->admin == Auth::user()->_id)
                                 <tr>
-                                    <th scope="row">{{$key + 1}}</th>
                                     <td>
                                         @foreach($users as $user)
                                             @if($user->_id == $order->user_id)
@@ -54,6 +52,7 @@
                                             class="dynamic-span"
                                             order-id="{{$order->_id}}"
                                             user-role="{{Auth::user()->role}}"
+                                            user-id="{{Auth::user()->id}}"
                                             style="cursor: pointer;"
                                             onclick="submitForm(this)"
                                         >{{$dynamicVar}}</span>
@@ -71,6 +70,7 @@
         {{csrf_field()}}
         <input type="hidden" name="order_id" id="order-id">
         <input type="hidden" name="user_role" id="user-role">
+        <input type="hidden" name="user_id" id="user-id">
     </form>
 
 @endsection
@@ -80,6 +80,7 @@
         let submitForm = (el) => {
             document.querySelector('#managementForm #order-id').value = el.getAttribute('order-id');
             document.querySelector('#managementForm #user-role').value = el.getAttribute('user-role');
+            document.querySelector('#managementForm #user-id').value = el.getAttribute('user-id');
             document.querySelector('#managementForm').submit();
         }
     </script>

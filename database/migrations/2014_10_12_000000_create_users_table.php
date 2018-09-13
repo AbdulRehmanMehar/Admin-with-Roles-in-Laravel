@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('isAdmin')->default(false); // to check if admin
             $table->string('role')->nullable();
+            $table->string('orders')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
