@@ -62,7 +62,11 @@ class ShoppingController extends Controller
         $users = User::where(['isAdmin' => true, 'role' => 'order'])->get(); // Just Getting Order Managers.....
         $return = User::where(['isAdmin' => true, 'role' => 'mainAdmin'])->first(); // Just in case of no free admin
         foreach($users as $user){
-            if(count(explode(" ", $user->orders)) < 3){
+            if($user->orders == ""){
+                $return = $user;
+                break; // Exit the loop if admin is found.....
+            }
+            if(count(explode(" ", $user->orders)) < 2){
                 $return = $user;
                 break; // Exit the loop if admin is found.....
             }
@@ -77,7 +81,7 @@ class ShoppingController extends Controller
         }else{
             if($user->role == "mainAdmin"){
                 $user->orders = $user->orders . " $order_id";
-            }elseif(count(explode(" ", $user->orders)) < 3){
+            }elseif(count(explode(" ", $user->orders)) < 2){
                 $user->orders = $user->orders . " $order_id";
             }
         }

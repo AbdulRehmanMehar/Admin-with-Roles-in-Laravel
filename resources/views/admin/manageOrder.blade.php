@@ -12,6 +12,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th scope="col">Order Id</th>
                             <th scope="col">Ordered By</th>
                             <th scope="col">Products</th>
                             <th scope="col">Action</th>
@@ -33,8 +34,9 @@
                                     $process = 'Product Shipped';
                                 }
                             @endphp
-                            @if($order->process == $process && $order->admin == Auth::user()->_id)
+                            @if($order->admin == Auth::user()->_id)
                                 <tr>
+                                    <td>{{$order->_id}}</td>
                                     <td>
                                         @foreach($users as $user)
                                             @if($user->_id == $order->user_id)
