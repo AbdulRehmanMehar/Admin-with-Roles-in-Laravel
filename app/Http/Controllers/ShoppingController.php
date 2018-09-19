@@ -10,6 +10,7 @@ use App\Order;
 use App\Product;
 use Auth;
 use DB;
+use App\OrdersHandler;
 
 class ShoppingController extends Controller
 {
@@ -58,47 +59,26 @@ class ShoppingController extends Controller
         return redirect()->back();
     }
 
-    private function getFreeAdmins(){
-        $users = User::where(['isAdmin' => true, 'role' => 'order'])->get(); // Just Getting Order Managers.....
-        $return = User::where(['isAdmin' => true, 'role' => 'mainAdmin'])->first(); // Just in case of no free admin
-        foreach($users as $user){
-            if($user->orders == ""){
-                $return = $user;
-                break; // Exit the loop if admin is found.....
-            }
-            if(count(explode(" ", $user->orders)) < 2){
-                $return = $user;
-                break; // Exit the loop if admin is found.....
-            }
-        }
-        return $return;
-    }
-
-    private function setAdminOrders($user_id, $order_id){
-        $user = User::where('_id', $user_id)->first();
-        if($user->orders == ""){
-            $user->orders = "$order_id";
-        }else{
-            if($user->role == "mainAdmin"){
-                $user->orders = $user->orders . " $order_id";
-            }elseif(count(explode(" ", $user->orders)) < 2){
-                $user->orders = $user->orders . " $order_id";
-            }
-        }
-        $user->save();
-    }
 
     public function checkout(Request $request){
         // converts the Cart content from array to string to store it
+        $OrdersHandler = new OrdersHandler;
+        $admin_id = ($OrdersHandler->getFreeAdmins('order') == '') ? '' : $OrdersHandler->getFreeAdmins('order')->_id;
+        $pending = ($OrdersHandler->getFreeAdmins('order') == '') ? true : false;
         $cart = (string)(Cart::content());
         $order = Order::create([
             'cart' => $cart,
             'user_id' => Auth::user()->id,
             'state' => 0,
             'staff_id' => 0,
-            'admin' => $this->getFreeAdmins()->_id
+            'admin' => $admin_id,
+            'pending' => $pending
         ]);
-        $this->setAdminOrders($order->admin, $order->_id);
+        if($admin_id == ""){
+            $OrdersHandler->setPending($order->_id, ''); // process is empty
+        }else{
+            $OrdersHandler->setAdminOrders($order->admin, $order->_id, ''); // we don't need to set order_process yet
+        }
         Cart::destroy();
         foreach(Cart::content() as $cartB){
             Cart::remove($cartB->id);
