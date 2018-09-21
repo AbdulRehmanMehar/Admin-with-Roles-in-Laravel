@@ -22,19 +22,15 @@
                         @foreach ($orders as $key => $order)
                             @php
                                 $dynamicVar;
-                                $process;
                                 if(Auth::user()->role == 'order'){
                                     $dynamicVar = 'Confirm Order';
-                                    $process = '';
                                 }elseif(Auth::user()->role == 'shipping'){
                                     $dynamicVar = 'Confirm Shipment';
-                                    $process = 'Order Confirmed';
                                 }elseif(Auth::user()->role == 'delivery'){
                                     $dynamicVar = 'Confirm Delivery';
-                                    $process = 'Product Shipped';
                                 }
                             @endphp
-                            @if($order->admin == Auth::user()->_id)
+                            @if($order->admin == Auth::user()->_id && $order->admin_type == Auth::user()->role)
                                 <tr>
                                     <td>{{$order->_id}}</td>
                                     <td>

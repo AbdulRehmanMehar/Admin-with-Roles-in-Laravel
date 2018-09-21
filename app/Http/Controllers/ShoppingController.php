@@ -63,8 +63,8 @@ class ShoppingController extends Controller
     public function checkout(Request $request){
         // converts the Cart content from array to string to store it
         $OrdersHandler = new OrdersHandler;
-        $admin_id = ($OrdersHandler->getFreeAdmins('order') == '') ? '' : $OrdersHandler->getFreeAdmins('order')->_id;
-        $pending = ($OrdersHandler->getFreeAdmins('order') == '') ? true : false;
+        $admin_id = ($OrdersHandler->getFreeAdmins('order') == '') ? '' : $OrdersHandler->getFreeAdmins('order')->_id; // if any admin found , then assigns its id else ''
+        $pending = ($OrdersHandler->getFreeAdmins('order') == '') ? true : false; // if any admin found , then false else true
         $cart = (string)(Cart::content());
         $order = Order::create([
             'cart' => $cart,
@@ -72,18 +72,17 @@ class ShoppingController extends Controller
             'state' => 0,
             'staff_id' => 0,
             'admin' => $admin_id,
+            'admin_type' => 'order',
             'pending' => $pending
         ]);
-        if($admin_id == ""){
-            $OrdersHandler->setPending($order->_id, ''); // process is empty
-        }else{
+        if($admin_id != ""){ // If admin id is empty , no admin is free , so we don't want to set the order
             $OrdersHandler->setAdminOrders($order->admin, $order->_id, ''); // we don't need to set order_process yet
         }
         Cart::destroy();
         foreach(Cart::content() as $cartB){
             Cart::remove($cartB->id);
         }
-        return redirect()->back();
+        return redirect()->route('index');
 
 
     }

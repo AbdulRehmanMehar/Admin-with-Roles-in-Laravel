@@ -19,7 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('user_id');
             $table->string('process')->nullable();
             $table->boolean('pending')->default(false);
-            $table->string('admin');
+            $table->string('admin')->nullable();
+            $table->string('admin_type')->nullable();
             $table->timestamps();
         });
     }

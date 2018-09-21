@@ -70,7 +70,7 @@ class AdminController extends Controller
         $user_role = $request->user_role;
         $process;
         $admin;
-        $OrdersHandler = new OrdersHandler;
+        $OrdersHandler = new OrdersHandler; // Seperated functions into class App\OrdersHandler
         if($user_role == 'order'){
             $process = 'Order Confirmed';
             $admin = $OrdersHandler->getFreeAdmins('shipping'); // After Order Complition , Search for Shipping Manager
@@ -81,20 +81,20 @@ class AdminController extends Controller
             $admin = "blah"; // to get passed in if statement
             $process = 'Product Delivered';
         }
-        $OrdersHandler->removeAdminOrders($request->user_id, $request->order_id);
 
-        if($admin != ''){
+        if($admin != ''){ // If free admin is found, execute this code else pend the order 
             if($user_role != 'delivery'){
-                $OrdersHandler->setAdminOrders($admin->_id, $request->order_id, $process);
+                $OrdersHandler->setAdminOrders($admin->_id, $request->order_id, $process); // Assigns Orders to admins
             }else{
-                $OrdersHandler->setAdminOrders("", $request->order_id, $process);
+                $OrdersHandler->setAdminOrders("",$request->order_id, $process); // For delivery manager , no next admin is needed because we don't need to process order anymore.
             }
         }else{
-            $OrdersHandler->setPending($request->order_id, $process);
+            $OrdersHandler->setPending($request->order_id, $process); // If no admin is free , set order as pending
         }
 
-        $OrdersHandler->assignPending($user_role);
+        $OrdersHandler->removeAdminOrders($request->user_id, $request->order_id); // Remove old admin
+        $OrdersHandler->assignPending($user_role); // After each order complition , check for pending orders and assign to free admins
 
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.orders.manage');
     }
 }

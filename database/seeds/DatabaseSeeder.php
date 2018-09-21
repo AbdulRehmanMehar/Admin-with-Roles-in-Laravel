@@ -78,13 +78,11 @@ class DatabaseSeeder extends Seeder
             'isAdmin' => true,
             'role' => 'delivery'
         ]);
-        // Mian Admin
+        // Customer
         DB::table('users')->insert([
-            'name' => 'Real Admin',
-            'email' => 'theadmin@app.com',
-            'password' => bcrypt('admin'),
-            'isAdmin' => true,
-            'role' => 'mainAdmin'
-        ]); // This is just in case of no free member
+            'name' => 'Customer',
+            'email' => 'customer@app.com',
+            'password' => bcrypt('customer'),
+        ]);
     }
 }
