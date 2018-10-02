@@ -1,10 +1,7 @@
-# workscheduler
-A Simple School Project.
-# Changes
-1. Created 2 middlewares named as `isAdmin` and `PreventBackHistory` and registered those into `Kernel`.
-  * `isAdmin` middleware will be used by us to check whether logged in user is an `Admin` or not.
-  * `PreventBackHistory` middleware prevents user to go  back to profile page after logout.
-  * `HomeController` also uses `PreventBackHistory` middleware.
-2. Modified `create_users_table` and added a field `isAdmin`.
-  * `isAdmin` is boolean and will tell us if user is `Admin`.
-3. Created `AdminController` for `Admins`.
+# Certain Permissions to Admin
+This application have 3 types of admins and there are 3 admins with 1 role.Each admin can handle 2 requests at a time and when all admins of same role get 2 requests, next request is marked as pending request which later on assigned to the admin who handled 1 of the 2 requests.
+# What does it contain?
+Functionality, this application have, is written below:
+1. Multi Auth System (Standard Users, Admins)
+2. Admin have certain Permissions but each can add products
+3. Customers have a dashboard to view their orders.
