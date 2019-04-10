@@ -15,5 +15,10 @@ class ProductsController extends Controller
         return view('products')->with('products',$products);
     }
 
+    public function homepage()
+    {
+        return view('welcome');
+    }
+
 
 }
