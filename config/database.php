@@ -35,9 +35,11 @@ return [
 
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => 'localhost',
-            'port'     => 27017,
-            'database' => 'work_db',
+            'host'     => env('DB_HOST', 'localhost'),
+            'port'     => env('DB_PORT', '27017'),
+            'database' => env('DB_DATABASE', 'test'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
         ],
 
         'sqlite' => [

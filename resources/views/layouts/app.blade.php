@@ -39,6 +39,9 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('products') }}">Products </a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -48,9 +51,7 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('index') }}">Products </a>
-                            </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('cart') }}">Cart </a>
                             </li>
