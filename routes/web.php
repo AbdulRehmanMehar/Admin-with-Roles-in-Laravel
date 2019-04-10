@@ -1,7 +1,9 @@
 <?php
 
 // home screen route
-Route::get('/', 'ProductsController@index')->name('index');
+Route::get('/', 'ProductsController@homepage')->name('index');
+Route::get('/products', 'ProductsController@index')->name('products');
+
 
 Auth::routes();
 
