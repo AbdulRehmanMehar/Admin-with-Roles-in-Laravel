@@ -2,8 +2,88 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <div class="card">
+                    <div class="card-header">Default Users</div>
+                    <div class="card-body" style="height: calc(100vh - 150px); overflow-y: auto">
+                        <table class="table">
+                            <tr>
+                                <th colspan="5" class="text-center">Default Users</th>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Role</th>
+                                <th colspan="2">Description</th>
+                            </tr>
+                            <tr>
+                                <td>ordermanager1@app.com</td>
+                                <td>admin</td>
+                                <td>Order Manager</td>
+                                <td>Handles orders when a client makes it.</td>
+                            </tr>
+                            <tr>
+                                <td>ordermanager2@app.com</td>
+                                <td>admin</td>
+                                <td>Order Manager</td>
+                                <td>Handles orders when a client makes it.</td>
+                            </tr>
+                            <tr>
+                                <td>ordermanager3@app.com</td>
+                                <td>admin</td>
+                                <td>Order Manager</td>
+                                <td>Handles orders when a client makes it.</td>
+                            </tr>
+                            <tr>
+                                <td>shippingmanager1@app.com</td>
+                                <td>admin</td>
+                                <td>Shipping Manager</td>
+                                <td>Further processes the order when processed by Order Manager.</td>
+                            </tr>
+                            <tr>
+                                <td>shippingmanager2@app.com</td>
+                                <td>admin</td>
+                                <td>Shipping Manager</td>
+                                <td>Further processes the order when processed by Order Manager.</td>
+                            </tr>
+                            <tr>
+                                <td>shippingmanager3@app.com</td>
+                                <td>admin</td>
+                                <td>Shipping Manager</td>
+                                <td>Further processes the order when processed by Order Manager.</td>
+                            </tr>
+                            <tr>
+                                <td>deliverymanager1@app.com</td>
+                                <td>admin</td>
+                                <td>Delivery Manager</td>
+                                <td>Delivers the order when processed by Shipping Manager.</td>
+                            </tr>
+                            <tr>
+                                <td>deliverymanager2@app.com</td>
+                                <td>admin</td>
+                                <td>Delivery Manager</td>
+                                <td>Delivers the order when processed by Shipping Manager.</td>
+                            </tr>
+                            <tr>
+                                <td>deliverymanager3@app.com</td>
+                                <td>admin</td>
+                                <td>Delivery Manager</td>
+                                <td>Delivers the order when processed by Shipping Manager.</td>
+                            </tr>
+                            <tr>
+                                <td>customer@app.com</td>
+                                <td>customer</td>
+                                <td>-</td>
+                                <td>Standard Customer that makes or tracks the order.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
